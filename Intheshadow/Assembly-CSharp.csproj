@@ -57,6 +57,7 @@
      <Compile Include="Assets\SampleScenes\Scripts\SlowMoButton.cs" />
      <Compile Include="Assets\Script\ButtonBehav.cs" />
      <Compile Include="Assets\Script\Cameralvlselect.cs" />
+     <Compile Include="Assets\Script\GameControl.cs" />
      <Compile Include="Assets\Script\NewBehaviourScript.cs" />
      <Compile Include="Assets\Script\SaveLoad.cs" />
      <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />

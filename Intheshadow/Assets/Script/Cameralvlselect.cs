@@ -15,6 +15,7 @@ public class Cameralvlselect : MonoBehaviour, IComparer {
 	}
 
 	void Start () {
+		Debug.Log (GameControl.control.Mode);
         Levels = GameObject.FindGameObjectsWithTag("Level");
 		IComparer myComparer = new Cameralvlselect ();
 		Array.Sort (Levels, myComparer);
@@ -42,6 +43,16 @@ public class Cameralvlselect : MonoBehaviour, IComparer {
         }
 		if (Input.GetKeyDown (KeyCode.Return)) {
 			//Application.LoadLevel(Level[Where].name);
+		}
+	}
+
+	void LoadProfile()
+	{
+		if (GameControl.control.Mode == 0) {
+			//unlock everything
+		} 
+		else if (GameControl.control.Mode == 1) {
+			GameControl.control.Load();
 		}
 	}
 }

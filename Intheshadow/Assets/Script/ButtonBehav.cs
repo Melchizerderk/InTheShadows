@@ -16,12 +16,14 @@ public class ButtonBehav : MonoBehaviour {
     public void OnDevClick()
     {
         Debug.Log("dev");
-        //Application.LoadLevel();
+		GameControl.control.Mode = 0;
+        Application.LoadLevel("LevelSelect");
     }
 
     public void OnNormalClick()
     {
         Debug.Log("test");
-        //
+		GameControl.control.Mode = 1;
+		Application.LoadLevel ("LevelSelect");
     }
 }
