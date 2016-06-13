@@ -9,8 +9,8 @@ public class GameControl : MonoBehaviour {
 	// Use this for initialization
 	public static GameControl control;
 
-	public float Mode = -1;
-	public float PlayerLevel;
+	public int Mode = -1;
+	public int PlayerLevel;
 
 	void Awake() {
 		if (control == null) {
@@ -58,5 +58,5 @@ public class GameControl : MonoBehaviour {
 [Serializable]
 class PlayerData
 {
-	public float Level;	
+	public int Level;	
 }
