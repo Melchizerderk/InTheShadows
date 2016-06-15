@@ -25,6 +25,8 @@ public class Level1Script : MonoBehaviour {
 			if (havewon == true)
 			{
 				LvlCanvas.GetComponent<CanvasGroup>().alpha = 1;
+				LvlCanvas.GetComponent<CanvasGroup>().interactable = true;
+				LvlCanvas.GetComponent<CanvasGroup>().blocksRaycasts = true;
 				SaveProfile();
 			}
 		}
