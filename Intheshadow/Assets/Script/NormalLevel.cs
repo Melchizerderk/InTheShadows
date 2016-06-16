@@ -5,52 +5,77 @@ public class NormalLevel : MonoBehaviour {
 
 	private Quaternion WinPosX;
 	private Quaternion WinPosY;
-	private bool havewon = false;
-	public GameObject LvlCanvas;
+	[HideInInspector]
+	public bool havewon = false;
+	private bool selected = false;
+	public GameObject Thisgameobject;
+	private Vector3 target;
 	
 	void Start () {
+		WinPosX.y = gameObject.transform.rotation.y;
+		WinPosX.x = 1;
 		WinPosY.x = gameObject.transform.rotation.x;
 		WinPosY.y = 1;
-		WinPosX.x = 1;
-		WinPosX.y = gameObject.transform.rotation.y;
-		LvlCanvas.GetComponent<CanvasGroup>().alpha = 0;
-		LvlCanvas.GetComponent<CanvasGroup>().interactable = false;
-		LvlCanvas.GetComponent<CanvasGroup>().blocksRaycasts = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetMouseButton(0))
-			transform.Rotate(0, Input.GetAxis("Mouse X"), 0);
-		if (Quaternion.Angle (WinPosY, gameObject.transform.rotation) < 10) {
-			StartCoroutine(WinWaitTime(3));
-			if (havewon == true)
+		if (Input.GetMouseButtonDown (1)) {
+			RaycastHit hit;
+			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			if (Physics.Raycast(ray, out hit, 100f))
 			{
-				LvlCanvas.GetComponent<CanvasGroup>().alpha = 1;
-				SaveProfile();
+				Debug.DrawLine(ray.origin, hit.point, Color.green);
+				Debug.Log (hit.collider.name);
+				if (hit.collider.name == Thisgameobject.transform.GetChild(0).name)
+					selected = true;
+				else
+					selected = false;
 			}
 		}
-		if (Input.GetKeyDown (KeyCode.Escape)) {
-			Application.LoadLevel("LevelSelect");
+		if (selected == true) {
+			if (Input.GetMouseButton (0) && Input.GetKey (KeyCode.LeftShift)) {
+				transform.Rotate (Input.GetAxis ("Mouse Y"), 0, 0, Space.World);
+			} 
+			else if (Input.GetMouseButton (0) && !(Input.GetKey (KeyCode.LeftShift)) 
+			         && !(Input.GetKey(KeyCode.LeftControl)) && !(Input.GetKey(KeyCode.RightControl))) {
+				transform.Rotate (0, Input.GetAxis ("Mouse X"), 0, Space.World);
+			}
+			else if (Input.GetMouseButton(0) && Input.GetKey(KeyCode.LeftControl))
+			{
+				float ypos = Camera.main.ScreenToWorldPoint(Input.mousePosition).y;
+				Vector3 target = new Vector3(transform.position.x, ypos, transform.position.z);
+				if (Input.GetAxis("Mouse Y") < 0)
+					transform.position = Vector3.MoveTowards(transform.position, target, 1f);
+				if (Input.GetAxis("Mouse Y") > 0)
+					transform.position = Vector3.MoveTowards(transform.position, target, -1f);
+			}
+			else if (Input.GetMouseButton(0) && Input.GetKey(KeyCode.RightControl))
+			{
+				float xpos = Camera.main.ScreenToWorldPoint(Input.mousePosition).x;
+				Vector3 target = new Vector3(xpos, transform.position.y, transform.position.z);
+				if (Input.GetAxis("Mouse X") < 0)
+					transform.position = Vector3.MoveTowards(transform.position, target, 1f);
+				if (Input.GetAxis("Mouse X") > 0)
+					transform.position = Vector3.MoveTowards(transform.position, target, -1f);
+			}
+			Debug.Log (Quaternion.Angle (WinPosX, gameObject.transform.rotation));
+			Debug.Log (Quaternion.Angle (WinPosY, gameObject.transform.rotation));
+			if (Quaternion.Angle (WinPosX, gameObject.transform.rotation) > 85 && 
+				Quaternion.Angle (WinPosX, gameObject.transform.rotation) < 100 &&
+				Quaternion.Angle (WinPosY, gameObject.transform.rotation) > 165) {
+				StartCoroutine (WinWaitTime (3));
+			}
 		}
 	}
 	
 	IEnumerator WinWaitTime(int wtime){
 		yield return new WaitForSeconds (wtime);
-		if (Quaternion.Angle (WinPosY, gameObject.transform.rotation) < 10)
+		if (Quaternion.Angle (WinPosX, gameObject.transform.rotation) > 85 && 
+		    Quaternion.Angle (WinPosX, gameObject.transform.rotation) < 100 &&
+		    Quaternion.Angle (WinPosY, gameObject.transform.rotation) > 170)
 			havewon = true;
 		else
 			havewon = false;
-	}
-	
-	void SaveProfile()
-	{
-		if (GameControl.control.Mode == 1) {
-			if (GameControl.control.PlayerLevel == 0)
-			{
-				GameControl.control.PlayerLevel = 1;
-				GameControl.control.Save();
-			}
-		}
 	}
 }

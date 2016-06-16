@@ -62,6 +62,7 @@
      <Compile Include="Assets\Script\Level2Script.cs" />
      <Compile Include="Assets\Script\NewBehaviourScript.cs" />
      <Compile Include="Assets\Script\NormalLevel.cs" />
+     <Compile Include="Assets\Script\NormalLevelCamera.cs" />
      <Compile Include="Assets\Script\RetryButton.cs" />
      <Compile Include="Assets\Script\SaveLoad.cs" />
      <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
