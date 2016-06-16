@@ -43,24 +43,24 @@ public class NormalLevel : MonoBehaviour {
 			}
 			else if (Input.GetMouseButton(0) && Input.GetKey(KeyCode.LeftControl))
 			{
-				float ypos = Camera.main.ScreenToWorldPoint(Input.mousePosition).y;
+				float ypos = Input.mousePosition.y;
 				Vector3 target = new Vector3(transform.position.x, ypos, transform.position.z);
-				if (Input.GetAxis("Mouse Y") < 0)
-					transform.position = Vector3.MoveTowards(transform.position, target, 1f);
 				if (Input.GetAxis("Mouse Y") > 0)
+					transform.position = Vector3.MoveTowards(transform.position, target, 1f);
+				if (Input.GetAxis("Mouse Y") < 0)
 					transform.position = Vector3.MoveTowards(transform.position, target, -1f);
 			}
 			else if (Input.GetMouseButton(0) && Input.GetKey(KeyCode.RightControl))
 			{
-				float xpos = Camera.main.ScreenToWorldPoint(Input.mousePosition).x;
+				float xpos = Input.mousePosition.x;
 				Vector3 target = new Vector3(xpos, transform.position.y, transform.position.z);
-				if (Input.GetAxis("Mouse X") < 0)
-					transform.position = Vector3.MoveTowards(transform.position, target, 1f);
 				if (Input.GetAxis("Mouse X") > 0)
+					transform.position = Vector3.MoveTowards(transform.position, target, 1f);
+				if (Input.GetAxis("Mouse X") < 0)
 					transform.position = Vector3.MoveTowards(transform.position, target, -1f);
 			}
-			Debug.Log (Quaternion.Angle (WinPosX, gameObject.transform.rotation));
-			Debug.Log (Quaternion.Angle (WinPosY, gameObject.transform.rotation));
+			/*Debug.Log (Quaternion.Angle (WinPosX, gameObject.transform.rotation));
+			Debug.Log (Quaternion.Angle (WinPosY, gameObject.transform.rotation));*/
 			if (Quaternion.Angle (WinPosX, gameObject.transform.rotation) > 85 && 
 				Quaternion.Angle (WinPosX, gameObject.transform.rotation) < 100 &&
 				Quaternion.Angle (WinPosY, gameObject.transform.rotation) > 165) {
