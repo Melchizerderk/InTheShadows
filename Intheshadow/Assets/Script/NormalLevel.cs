@@ -2,20 +2,14 @@
 using System.Collections;
 
 public class NormalLevel : MonoBehaviour {
-
-	private Quaternion WinPosX;
-	private Quaternion WinPosY;
-	[HideInInspector]
-	public bool havewon = false;
+	
 	private bool selected = false;
 	public GameObject Thisgameobject;
 	private Vector3 target;
-	
+	[HideInInspector]
+	public bool havewon = false;
+
 	void Start () {
-		WinPosX.y = gameObject.transform.rotation.y;
-		WinPosX.x = 1;
-		WinPosY.x = gameObject.transform.rotation.x;
-		WinPosY.y = 1;
 	}
 	
 	// Update is called once per frame
@@ -46,9 +40,9 @@ public class NormalLevel : MonoBehaviour {
 				float ypos = Input.mousePosition.y;
 				Vector3 target = new Vector3(transform.position.x, ypos, transform.position.z);
 				if (Input.GetAxis("Mouse Y") > 0)
-					transform.position = Vector3.MoveTowards(transform.position, target, 1f);
+					transform.position = Vector3.MoveTowards(transform.position, target, 0.5f);
 				if (Input.GetAxis("Mouse Y") < 0)
-					transform.position = Vector3.MoveTowards(transform.position, target, -1f);
+					transform.position = Vector3.MoveTowards(transform.position, target, -0.5f);
 			}
 			else if (Input.GetMouseButton(0) && Input.GetKey(KeyCode.RightControl))
 			{
@@ -59,23 +53,8 @@ public class NormalLevel : MonoBehaviour {
 				if (Input.GetAxis("Mouse X") < 0)
 					transform.position = Vector3.MoveTowards(transform.position, target, -1f);
 			}
-			/*Debug.Log (Quaternion.Angle (WinPosX, gameObject.transform.rotation));
-			Debug.Log (Quaternion.Angle (WinPosY, gameObject.transform.rotation));*/
-			if (Quaternion.Angle (WinPosX, gameObject.transform.rotation) > 85 && 
-				Quaternion.Angle (WinPosX, gameObject.transform.rotation) < 100 &&
-				Quaternion.Angle (WinPosY, gameObject.transform.rotation) > 165) {
-				StartCoroutine (WinWaitTime (3));
-			}
 		}
 	}
-	
-	IEnumerator WinWaitTime(int wtime){
-		yield return new WaitForSeconds (wtime);
-		if (Quaternion.Angle (WinPosX, gameObject.transform.rotation) > 85 && 
-		    Quaternion.Angle (WinPosX, gameObject.transform.rotation) < 100 &&
-		    Quaternion.Angle (WinPosY, gameObject.transform.rotation) > 170)
-			havewon = true;
-		else
-			havewon = false;
-	}
+
+	//pour la base mousey > 160 mousey < 120 et > 80
 }

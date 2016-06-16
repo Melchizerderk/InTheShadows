@@ -20,6 +20,9 @@ public class NormalLevelCamera : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		Debug.Log (i);
+		Debug.Log (Elements [0].gameObject.GetComponent<NormalLevel> ().havewon == true);
+		Debug.Log (Elements[1].gameObject.GetComponent<NormalLevel>().havewon == true);
 		if (Input.GetKeyDown (KeyCode.Escape)) {
 			Application.LoadLevel("LevelSelect");
 		}
@@ -36,9 +39,15 @@ public class NormalLevelCamera : MonoBehaviour {
 		}
 		if (i == elemnbr)
 		{
-			LvlCanvas.GetComponent<CanvasGroup> ().alpha = 1;
-			LvlCanvas.GetComponent<CanvasGroup> ().interactable = true;
-			LvlCanvas.GetComponent<CanvasGroup> ().blocksRaycasts = true;
+			if (Elements[0].gameObject.GetComponent<Transform>().position.x - Elements[1].gameObject.GetComponent<Transform>().position.x > -5 &&
+			    Elements[0].gameObject.GetComponent<Transform>().position.x - Elements[1].gameObject.GetComponent<Transform>().position.x < 5 &&
+			    Elements[0].gameObject.GetComponent<Transform>().position.y - Elements[1].gameObject.GetComponent<Transform>().position.y > -4 && 
+			    Elements[0].gameObject.GetComponent<Transform>().position.y - Elements[1].gameObject.GetComponent<Transform>().position.y < 4)
+			{
+				LvlCanvas.GetComponent<CanvasGroup> ().alpha = 1;
+				LvlCanvas.GetComponent<CanvasGroup> ().interactable = true;
+				LvlCanvas.GetComponent<CanvasGroup> ().blocksRaycasts = true;
+			}
 			//SaveProfile ();
 		}
 	}

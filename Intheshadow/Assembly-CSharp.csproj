@@ -58,6 +58,8 @@
      <Compile Include="Assets\Script\ButtonBehav.cs" />
      <Compile Include="Assets\Script\Cameralvlselect.cs" />
      <Compile Include="Assets\Script\GameControl.cs" />
+     <Compile Include="Assets\Script\GlobeBaseWinPos.cs" />
+     <Compile Include="Assets\Script\GlobeEarthWin.cs" />
      <Compile Include="Assets\Script\Level1Script.cs" />
      <Compile Include="Assets\Script\Level2Script.cs" />
      <Compile Include="Assets\Script\NewBehaviourScript.cs" />
