@@ -11,6 +11,7 @@ public class GameControl : MonoBehaviour {
 
 	public int Mode = -1;
 	public int PlayerLevel;
+	public int WichLevel;
 
 	void Awake() {
 		if (control == null) {
@@ -28,7 +29,8 @@ public class GameControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		if (Input.GetKeyDown (KeyCode.Delete))
+			Application.Quit ();
 	}
 
 	public void Save() {

@@ -55,9 +55,9 @@ public class NormalLevelCamera : MonoBehaviour {
 	void SaveProfile()
 	{
 		if (GameControl.control.Mode == 1) {
-			if (GameControl.control.PlayerLevel == 1)
+			if (GameControl.control.WichLevel == GameControl.control.PlayerLevel)
 			{
-				GameControl.control.PlayerLevel = 2;
+				GameControl.control.PlayerLevel++;
 				GameControl.control.Save();
 			}
 		}

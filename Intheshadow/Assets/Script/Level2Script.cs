@@ -30,7 +30,7 @@ public class Level2Script : MonoBehaviour {
 		Debug.Log (Quaternion.Angle (WinPosY, gameObject.transform.rotation));
 		if (Quaternion.Angle (WinPosX, gameObject.transform.rotation) > 85 && 
 		    Quaternion.Angle (WinPosX, gameObject.transform.rotation) < 100 &&
-		    Quaternion.Angle (WinPosY, gameObject.transform.rotation) > 165) {
+		    Quaternion.Angle (WinPosY, gameObject.transform.rotation) > 160) {
 			StartCoroutine(WinWaitTime(3));
 			if (havewon == true)
 			{
