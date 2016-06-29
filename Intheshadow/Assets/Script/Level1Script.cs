@@ -30,7 +30,7 @@ public class Level1Script : MonoBehaviour {
 				SaveProfile();
 			}
 		}
-		if (Input.GetKeyDown (KeyCode.Escape)) {
+		if (Input.GetKeyDown (KeyCode.Delete)) {
 			Application.LoadLevel("LevelSelect");
 		}
 	}

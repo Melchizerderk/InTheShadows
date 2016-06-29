@@ -23,7 +23,7 @@ public class NormalLevelCamera : MonoBehaviour {
 		Debug.Log (i);
 		Debug.Log (Elements [0].gameObject.GetComponent<NormalLevel> ().havewon == true);
 		Debug.Log (Elements[1].gameObject.GetComponent<NormalLevel>().havewon == true);
-		if (Input.GetKeyDown (KeyCode.Escape)) {
+		if (Input.GetKeyDown (KeyCode.Delete)) {
 			Application.LoadLevel("LevelSelect");
 		}
 		if (Input.GetKeyDown (KeyCode.R))
@@ -47,8 +47,8 @@ public class NormalLevelCamera : MonoBehaviour {
 				LvlCanvas.GetComponent<CanvasGroup> ().alpha = 1;
 				LvlCanvas.GetComponent<CanvasGroup> ().interactable = true;
 				LvlCanvas.GetComponent<CanvasGroup> ().blocksRaycasts = true;
+				SaveProfile ();
 			}
-			//SaveProfile ();
 		}
 	}
 

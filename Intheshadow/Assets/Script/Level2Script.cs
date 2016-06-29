@@ -40,7 +40,7 @@ public class Level2Script : MonoBehaviour {
 				SaveProfile();
 			}
 		}
-		if (Input.GetKeyDown (KeyCode.Escape)) {
+		if (Input.GetKeyDown (KeyCode.Delete)) {
 			Application.LoadLevel("LevelSelect");
 		}
 		if (Input.GetKeyDown (KeyCode.R))
@@ -51,7 +51,7 @@ public class Level2Script : MonoBehaviour {
 		yield return new WaitForSeconds (wtime);
 		if (Quaternion.Angle (WinPosX, gameObject.transform.rotation) > 85 && 
 		    Quaternion.Angle (WinPosX, gameObject.transform.rotation) < 100 &&
-		    Quaternion.Angle (WinPosY, gameObject.transform.rotation) > 170)
+		    Quaternion.Angle (WinPosY, gameObject.transform.rotation) > 175)
 			havewon = true;
 		else
 			havewon = false;
