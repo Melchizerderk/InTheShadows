@@ -50,13 +50,13 @@ public class Cameralvlselect : MonoBehaviour, IComparer {
 			Application.LoadLevel(Levels[Where].name);
 		}
 		if (Levels [GameControl.control.WichLevel].gameObject.transform.FindChild ("Done").gameObject.GetComponent<MeshRenderer> ().enabled == true 
-		    && GameControl.control.LvlGotCompleted == true) {
+		    && GameControl.control.LvlGotCompleted == true && (GameControl.control.PlayerLevel - GameControl.control.WichLevel <= 1)) {
 			StartCoroutine(RotationRoutine());
 			CubeRotation = true;
 			GameControl.control.LvlGotCompleted = false;
 		}
 		if (CubeRotation == true) {
-			Levels[GameControl.control.WichLevel].gameObject.transform.Rotate(new Vector3(0,0,180), 45 * Time.deltaTime * 1f);
+			Levels[GameControl.control.WichLevel].gameObject.transform.Rotate(new Vector3(0,0,180), 90 * Time.deltaTime * 1f);
 			if (GameControl.control.WichLevel < maxlevel)
 			{
 				Levels[GameControl.control.WichLevel + 1].gameObject.transform.Rotate(new Vector3(0,0,90), 45 * Time.deltaTime * 1f);

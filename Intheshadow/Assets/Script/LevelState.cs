@@ -38,7 +38,10 @@ public class LevelState : MonoBehaviour {
 				state = -1;
 			}
 		}
-		if (GameControl.control.LvlGotCompleted == false)
+		if (GameControl.control.LvlGotCompleted == false ||
+		    (GameControl.control.LvlGotCompleted == true && 
+		 	lvlid != GameControl.control.WichLevel &&
+		 	lvlid != GameControl.control.PlayerLevel))
 			Rotate (state);
 	}
 	

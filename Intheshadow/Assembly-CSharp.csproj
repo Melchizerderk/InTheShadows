@@ -63,6 +63,8 @@
      <Compile Include="Assets\Script\Level1Script.cs" />
      <Compile Include="Assets\Script\Level2Script.cs" />
      <Compile Include="Assets\Script\LevelState.cs" />
+     <Compile Include="Assets\Script\Logo2win.cs" />
+     <Compile Include="Assets\Script\Logo4win.cs" />
      <Compile Include="Assets\Script\NewBehaviourScript.cs" />
      <Compile Include="Assets\Script\NormalLevel.cs" />
      <Compile Include="Assets\Script\NormalLevelCamera.cs" />

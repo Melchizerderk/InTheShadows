@@ -28,17 +28,21 @@ public class Level2Script : MonoBehaviour {
 		}
 		Debug.Log ("PosX" + Quaternion.Angle (WinPosX, gameObject.transform.rotation));
 		Debug.Log ("PosY" + Quaternion.Angle (WinPosY, gameObject.transform.rotation));
-		if (Quaternion.Angle (WinPosX, gameObject.transform.rotation) > 85 && 
-		    Quaternion.Angle (WinPosX, gameObject.transform.rotation) < 103 &&
-		    Quaternion.Angle (WinPosY, gameObject.transform.rotation) > 160) {
+		if (Quaternion.Angle (WinPosY, gameObject.transform.rotation) > 85 && 
+		    Quaternion.Angle (WinPosY, gameObject.transform.rotation) < 105 &&
+		    Quaternion.Angle (WinPosX, gameObject.transform.rotation) > 160 ||
+		    (Quaternion.Angle (WinPosX, gameObject.transform.rotation) > 85 && 
+			 Quaternion.Angle (WinPosX, gameObject.transform.rotation) < 105 &&
+			 Quaternion.Angle (WinPosY, gameObject.transform.rotation) > 160)) {
 			StartCoroutine(WinWaitTime(3));
 			if (havewon == true)
 			{
 				LvlCanvas.GetComponent<CanvasGroup>().alpha = 1;
 				LvlCanvas.GetComponent<CanvasGroup>().interactable = true;
 				LvlCanvas.GetComponent<CanvasGroup>().blocksRaycasts = true;
+				if (GameControl.control.Mode == 1 && GameControl.control.WichLevel == GameControl.control.PlayerLevel)
+					GameControl.control.LvlGotCompleted = true;
 				SaveProfile();
-				GameControl.control.LvlGotCompleted = true;
 			}
 		}
 		if (Input.GetKeyDown (KeyCode.Delete)) {
@@ -50,9 +54,12 @@ public class Level2Script : MonoBehaviour {
 	
 	IEnumerator WinWaitTime(int wtime){
 		yield return new WaitForSeconds (wtime);
-		if (Quaternion.Angle (WinPosX, gameObject.transform.rotation) > 85 && 
-		    Quaternion.Angle (WinPosX, gameObject.transform.rotation) < 103 &&
-		    Quaternion.Angle (WinPosY, gameObject.transform.rotation) > 160)
+		if (Quaternion.Angle (WinPosY, gameObject.transform.rotation) > 85 && 
+		    Quaternion.Angle (WinPosY, gameObject.transform.rotation) < 105 &&
+		    Quaternion.Angle (WinPosX, gameObject.transform.rotation) > 160 ||
+		    (Quaternion.Angle (WinPosX, gameObject.transform.rotation) > 85 && 
+			 Quaternion.Angle (WinPosX, gameObject.transform.rotation) < 105 &&
+			 Quaternion.Angle (WinPosY, gameObject.transform.rotation) > 160))
 			havewon = true;
 		else
 			havewon = false;
@@ -61,7 +68,7 @@ public class Level2Script : MonoBehaviour {
 	void SaveProfile()
 	{
 		if (GameControl.control.Mode == 1) {
-			if (GameControl.control.PlayerLevel == 1)
+			if (GameControl.control.PlayerLevel == GameControl.control.WichLevel)
 			{
 				GameControl.control.PlayerLevel = 2;
 				GameControl.control.Save();

@@ -37,18 +37,31 @@ public class NormalLevelCamera : MonoBehaviour {
 				break;
 			}
 		}
+		if (i == 2) {
+			if (Elements[0].gameObject.GetComponent<NormalLevel>().havewon == false || Elements[1].gameObject.GetComponent<NormalLevel>().havewon == false)
+				i = 0;
+		}
 		if (i == elemnbr)
 		{
-			if (Elements[0].gameObject.GetComponent<Transform>().position.x - Elements[1].gameObject.GetComponent<Transform>().position.x > -5 &&
-			    Elements[0].gameObject.GetComponent<Transform>().position.x - Elements[1].gameObject.GetComponent<Transform>().position.x < 5 &&
-			    Elements[0].gameObject.GetComponent<Transform>().position.y - Elements[1].gameObject.GetComponent<Transform>().position.y > -4 && 
-			    Elements[0].gameObject.GetComponent<Transform>().position.y - Elements[1].gameObject.GetComponent<Transform>().position.y < 4)
+			if (GameControl.control.WichLevel == 3)
 			{
-				LvlCanvas.GetComponent<CanvasGroup> ().alpha = 1;
-				LvlCanvas.GetComponent<CanvasGroup> ().interactable = true;
-				LvlCanvas.GetComponent<CanvasGroup> ().blocksRaycasts = true;
-				SaveProfile ();
-				GameControl.control.LvlGotCompleted = true;
+				if (Elements[0].gameObject.GetComponent<Transform>().position.y - Elements[1].gameObject.GetComponent<Transform>().position.y > -5 &&
+				    Elements[0].gameObject.GetComponent<Transform>().position.y - Elements[1].gameObject.GetComponent<Transform>().position.y < 5 &&
+				    Elements[0].gameObject.GetComponent<Transform>().position.x - Elements[1].gameObject.GetComponent<Transform>().position.x > -30 && 
+				    Elements[0].gameObject.GetComponent<Transform>().position.x - Elements[1].gameObject.GetComponent<Transform>().position.x < 30)
+				{
+					StartCoroutine(WinWaitTime2());
+				}
+			}
+			else
+			{
+				if (Elements[0].gameObject.GetComponent<Transform>().position.x - Elements[1].gameObject.GetComponent<Transform>().position.x > -5 &&
+			   	 Elements[0].gameObject.GetComponent<Transform>().position.x - Elements[1].gameObject.GetComponent<Transform>().position.x < 5 &&
+			   	 Elements[0].gameObject.GetComponent<Transform>().position.y - Elements[1].gameObject.GetComponent<Transform>().position.y > -4 && 
+			   	 Elements[0].gameObject.GetComponent<Transform>().position.y - Elements[1].gameObject.GetComponent<Transform>().position.y < 4)
+				{
+					StartCoroutine(WinWaitTime());
+				}
 			}
 		}
 	}
@@ -59,8 +72,42 @@ public class NormalLevelCamera : MonoBehaviour {
 			if (GameControl.control.WichLevel == GameControl.control.PlayerLevel)
 			{
 				GameControl.control.PlayerLevel++;
+				if (GameControl.control.PlayerLevel >= 4)
+					GameControl.control.PlayerLevel = 3;
 				GameControl.control.Save();
 			}
+		}
+	}
+
+	IEnumerator WinWaitTime(){
+		yield return new WaitForSeconds (2);
+		if (Elements [0].gameObject.GetComponent<Transform> ().position.x - Elements [1].gameObject.GetComponent<Transform> ().position.x > -5 &&
+			Elements [0].gameObject.GetComponent<Transform> ().position.x - Elements [1].gameObject.GetComponent<Transform> ().position.x < 5 &&
+			Elements [0].gameObject.GetComponent<Transform> ().position.y - Elements [1].gameObject.GetComponent<Transform> ().position.y > -4 && 
+			Elements [0].gameObject.GetComponent<Transform> ().position.y - Elements [1].gameObject.GetComponent<Transform> ().position.y < 4) 
+		{
+			LvlCanvas.GetComponent<CanvasGroup> ().alpha = 1;
+			LvlCanvas.GetComponent<CanvasGroup> ().interactable = true;
+			LvlCanvas.GetComponent<CanvasGroup> ().blocksRaycasts = true;
+			if (GameControl.control.Mode == 1 && GameControl.control.WichLevel == GameControl.control.PlayerLevel)
+				GameControl.control.LvlGotCompleted = true;
+			SaveProfile ();
+		}
+	}
+
+	IEnumerator WinWaitTime2(){
+		yield return new WaitForSeconds (2);
+		if (Elements[0].gameObject.GetComponent<Transform>().position.y - Elements[1].gameObject.GetComponent<Transform>().position.y > -5 &&
+		    Elements[0].gameObject.GetComponent<Transform>().position.y - Elements[1].gameObject.GetComponent<Transform>().position.y < 5 &&
+		    Elements[0].gameObject.GetComponent<Transform>().position.x - Elements[1].gameObject.GetComponent<Transform>().position.x > -30 && 
+		    Elements[0].gameObject.GetComponent<Transform>().position.x - Elements[1].gameObject.GetComponent<Transform>().position.x < 30)
+		{
+			LvlCanvas.GetComponent<CanvasGroup> ().alpha = 1;
+			LvlCanvas.GetComponent<CanvasGroup> ().interactable = true;
+			LvlCanvas.GetComponent<CanvasGroup> ().blocksRaycasts = true;
+			if (GameControl.control.Mode == 1 && GameControl.control.WichLevel == GameControl.control.PlayerLevel)
+				GameControl.control.LvlGotCompleted = true;
+			SaveProfile ();
 		}
 	}
 }

@@ -27,8 +27,9 @@ public class Level1Script : MonoBehaviour {
 				LvlCanvas.GetComponent<CanvasGroup>().alpha = 1;
 				LvlCanvas.GetComponent<CanvasGroup>().interactable = true;
 				LvlCanvas.GetComponent<CanvasGroup>().blocksRaycasts = true;
+				if (GameControl.control.Mode == 1 && GameControl.control.WichLevel == GameControl.control.PlayerLevel)
+					GameControl.control.LvlGotCompleted = true;
 				SaveProfile();
-				GameControl.control.LvlGotCompleted = true;
 			}
 		}
 		if (Input.GetKeyDown (KeyCode.Delete)) {
@@ -47,7 +48,7 @@ public class Level1Script : MonoBehaviour {
 	void SaveProfile()
 	{
 		if (GameControl.control.Mode == 1) {
-			if (GameControl.control.PlayerLevel == 0)
+			if (GameControl.control.PlayerLevel == GameControl.control.PlayerLevel)
 			{
 				GameControl.control.PlayerLevel = 1;
 				GameControl.control.Save();
