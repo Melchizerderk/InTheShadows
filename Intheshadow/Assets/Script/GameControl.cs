@@ -12,6 +12,7 @@ public class GameControl : MonoBehaviour {
 	public int Mode = -1;
 	public int PlayerLevel;
 	public int WichLevel;
+	public bool LvlGotCompleted = false;
 
 	void Awake() {
 		if (control == null) {

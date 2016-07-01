@@ -28,6 +28,7 @@ public class Level1Script : MonoBehaviour {
 				LvlCanvas.GetComponent<CanvasGroup>().interactable = true;
 				LvlCanvas.GetComponent<CanvasGroup>().blocksRaycasts = true;
 				SaveProfile();
+				GameControl.control.LvlGotCompleted = true;
 			}
 		}
 		if (Input.GetKeyDown (KeyCode.Delete)) {

@@ -38,7 +38,8 @@ public class LevelState : MonoBehaviour {
 				state = -1;
 			}
 		}
-		Rotate (state);
+		if (GameControl.control.LvlGotCompleted == false)
+			Rotate (state);
 	}
 	
 	// Update is called once per frame

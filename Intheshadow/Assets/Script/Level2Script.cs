@@ -26,10 +26,10 @@ public class Level2Script : MonoBehaviour {
 		else if (Input.GetMouseButton (0) && !(Input.GetKey (KeyCode.LeftShift))) {
 			transform.Rotate (0, Input.GetAxis ("Mouse X"), 0, Space.World);
 		}
-		Debug.Log (Quaternion.Angle (WinPosX, gameObject.transform.rotation));
-		Debug.Log (Quaternion.Angle (WinPosY, gameObject.transform.rotation));
+		Debug.Log ("PosX" + Quaternion.Angle (WinPosX, gameObject.transform.rotation));
+		Debug.Log ("PosY" + Quaternion.Angle (WinPosY, gameObject.transform.rotation));
 		if (Quaternion.Angle (WinPosX, gameObject.transform.rotation) > 85 && 
-		    Quaternion.Angle (WinPosX, gameObject.transform.rotation) < 100 &&
+		    Quaternion.Angle (WinPosX, gameObject.transform.rotation) < 103 &&
 		    Quaternion.Angle (WinPosY, gameObject.transform.rotation) > 160) {
 			StartCoroutine(WinWaitTime(3));
 			if (havewon == true)
@@ -38,6 +38,7 @@ public class Level2Script : MonoBehaviour {
 				LvlCanvas.GetComponent<CanvasGroup>().interactable = true;
 				LvlCanvas.GetComponent<CanvasGroup>().blocksRaycasts = true;
 				SaveProfile();
+				GameControl.control.LvlGotCompleted = true;
 			}
 		}
 		if (Input.GetKeyDown (KeyCode.Delete)) {
@@ -50,8 +51,8 @@ public class Level2Script : MonoBehaviour {
 	IEnumerator WinWaitTime(int wtime){
 		yield return new WaitForSeconds (wtime);
 		if (Quaternion.Angle (WinPosX, gameObject.transform.rotation) > 85 && 
-		    Quaternion.Angle (WinPosX, gameObject.transform.rotation) < 100 &&
-		    Quaternion.Angle (WinPosY, gameObject.transform.rotation) > 175)
+		    Quaternion.Angle (WinPosX, gameObject.transform.rotation) < 103 &&
+		    Quaternion.Angle (WinPosY, gameObject.transform.rotation) > 160)
 			havewon = true;
 		else
 			havewon = false;
